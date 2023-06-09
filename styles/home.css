@@ -1,0 +1,11 @@
+.award-title-bg {
+    background-image: url('/images/award-background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.award-main-bg {
+    background-image: url('/images/horizontal-bar.jpg');
+    background-repeat: no-repeat;
+    background-color: black;
+}

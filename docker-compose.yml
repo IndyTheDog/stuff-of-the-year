@@ -54,6 +54,8 @@ services:
       - $PWD/styles:/app/styles:ro
       - $PWD/package.json:/app/package.json
       - $PWD/tsconfig.json:/app/tsconfig.json
+      - $PWD/tailwind.config.js:/app/tailwind.config.js
+      - $PWD/postcss.config.js:/app/postcss.config.js
       - $PWD/yarn.lock:/app/yarn.lock
   # One time setup
   setup:

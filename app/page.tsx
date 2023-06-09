@@ -11,6 +11,9 @@ export default function Page() {
     <>
       <Head>
       </Head>
+      <div className='bg-slate-500'>
+          Hello
+        </div>
     </>
   )
 }
