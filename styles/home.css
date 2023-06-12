@@ -2,10 +2,12 @@
     background-image: url('/images/award-background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size: 100% 100%;
 }
 
 .award-main-bg {
     background-image: url('/images/horizontal-bar.jpg');
     background-repeat: no-repeat;
     background-color: black;
+    background-size: 100%;
 }

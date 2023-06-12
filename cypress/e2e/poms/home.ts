@@ -1,7 +1,7 @@
 const Home = () => {
     const checkRequiredElements = () => {
         // Open homepage
-        cy.visit('http://localhost:3000/home')
+        cy.visit('http://localhost:3000')
 
         // Find logo
         cy.get('img[id="award-logo"]').should('exist')
