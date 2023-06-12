@@ -4,9 +4,15 @@ This is a projects based of the awesome https://github.com/jscoobyced/nextjs-tdd
 
 ## Getting Started
 
+Run
+```
+make setup
+```
+to initialize the environment.
+
 ### Tests
 
-Simply run
+Run
 ```
 make test
 ```
