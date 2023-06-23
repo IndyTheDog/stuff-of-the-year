@@ -1,50 +1,41 @@
-import Image from 'next/image'
-import '../styles/home.css'
 import '../styles/montserrat.css'
+import Footer from './components/Footer'
+import Header from './components/Header'
+import Project from './components/Project'
 
 const Home = () => {
   return (
     <>
-      <div className="award-title-bg min-w-[1090px] flex flex-col items-center">
-        <Image
-          className="py-28"
-          src={'/images/award-logo.png'}
-          width={336}
-          height={336}
-          alt="Award logo"
-          id="award-logo"
-        />
-      </div>
-
-      <main className="award-main-bg min-w-[1090px] text-white flex flex-col items-center text-center">
-        <h1 id="award-title" className="pt-10 w-2/3 text-5xl font-bold">
-          People&apos;s Choice Awards for
-        </h1>
-        <h2
-          id="award-subtitle"
-          className="w-2/3 pt-1 text-5xl text-yellow-500"
-        >
-          Project of the Year 2023
-        </h2>
-        <span id="award-intro" className="pt-10 text-lg w-3/4">
-          Each year, the Dot Property Awards asks the public to tell us what
-          real estate project they like best. Have your voice heard and vote for
-          the People’s Choice Award for Project of the Year. Scroll down to
-          learn more about this year’s contenders and then select your favorite.
-        </span>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+      <Header></Header>
+      <main className="pt-10 min-w-full flex flex-col items-center">
+        <div className="w-5/6 grid grid-cols-2 grid-col gap-16 pb-10">
+          <Project
+            id="01"
+            description="Prepare to meet luxury houses, new projects INSPIRED BY BLED CASTLE ,SLOVENIA in the midst of modern atmosphere close to nature with beautiful gardens around the project. with beautiful scenery with electric wires to the ground for the whole project luxury club house Large swimming pool and fully equipped fitness center with RELAX SPACE for the whole family to truly relax."
+            location="Bangkok"
+            propertyType="House"
+            publisherName="SC ASSET"
+            title="Bangkok Boulevard Signature Chaengwattana"
+          ></Project>
+          <Project
+            id="02"
+            description="Meet the new series of luxury Nordic houses inspired by the tourist destinations in Northern Europe. Feel closer to nature with the high-ceiling, glass wall, an architectural signature of Nordic countries where the people are well known for being the happiest in the world. Feast your eyes on the iconic, elegant design of the luxury Nordic clubhouse with fully equipped facilities. Make your everyday life like an elegant staycation with the grand common park inspired by the 3 seasons of Scandinavian pine forest."
+            location="Bangkok"
+            propertyType="House"
+            publisherName="SC ASSET"
+            title="Bangkok Boulevard Changwattana 2"
+          ></Project>
+          <Project
+            id="03"
+            description="Dusit Residences features grand homes with stunning park vistas, ideal for those who desire a timelessly classic and private living space with close connections to the city. Tastefully furnished, Asian inspired décor with a subtle Thai sensibility brings together inviting colour combinations and accents of luxurious natural materials and fine finishes to this splendid sanctuary in the city."
+            location="Bangkok"
+            propertyType="House"
+            publisherName="Vimarn Suriya Co., Ltd."
+            title="Dusit Residences"
+          ></Project>
+        </div>
       </main>
+      <Footer></Footer>
     </>
   )
 }

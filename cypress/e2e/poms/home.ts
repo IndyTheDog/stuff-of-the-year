@@ -14,6 +14,12 @@ const Home = () => {
 
         // Find intro
         cy.get('span[id="award-intro"]').should('exist')
+
+        // Find Stuff
+        // cy.find('article').should('have.lengthOf', 5)
+
+        // Find Footer
+        cy.get('footer').should('not.be.empty')
     }
 
     return {
