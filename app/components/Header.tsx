@@ -12,7 +12,7 @@ const Header = () => {
           alt="Award logo"
           id="award-logo"
         />
-        <div className="award-main-bg min-w-full text-white flex flex-col items-center text-center">
+        <div className="award-main-bg min-w-full w-full text-white flex flex-col items-center text-center">
           <h1 id="award-title" className="pt-10 w-2/3 text-4xl font-bold">
             People&apos;s Choice Awards for
           </h1>
