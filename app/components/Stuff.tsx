@@ -20,7 +20,7 @@ const Stuff = (props: {
       <Image
         className="rounded-t-xl"
         src={`/images/stuff/${props.stuffImage}`}
-        width={513}
+        width={512}
         height={256}
         alt={`stuff of ${props.ownerName}.`}
         id={`stuff-image-${props.id}`}

@@ -11,13 +11,13 @@ module.exports = {
         'full': '545px'
       },
       maxWidth: {
-        'article': '513px',
+        'article': '512px',
       },
       colors: {
         'neutral-920': '#111111',
       },
       spacing: {
-        'article': '34rem',
+        'article': '37.5rem',
       }
     },
     fontSize: {
