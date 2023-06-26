@@ -1,8 +1,5 @@
 const Home = () => {
     const checkRequiredElements = () => {
-        // Open homepage
-        cy.visit('http://localhost:3000')
-
         // Find logo
         cy.get('img[id="award-logo"]').should('exist')
 
@@ -16,7 +13,7 @@ const Home = () => {
         cy.get('span[id="award-intro"]').should('exist')
 
         // Find Stuff
-        // cy.find('article').should('have.lengthOf', 5)
+        cy.get('article').should('have.lengthOf.at.least', 1)
 
         // Find Footer
         cy.get('footer').should('not.be.empty')

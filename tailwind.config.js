@@ -7,13 +7,17 @@ module.exports = {
         '7/10': '70%',
       },
       minWidth: {
-        'full': '1090px',
+        'full-lg': '1090px',
+        'full': '545px'
+      },
+      maxWidth: {
+        'article': '513px',
       },
       colors: {
         'neutral-920': '#111111',
       },
       spacing: {
-        'article': '33rem',
+        'article': '34rem',
       }
     },
     fontSize: {
@@ -25,6 +29,9 @@ module.exports = {
       '3xl': '1.953rem',
       '4xl': '2.625rem',
       '5xl': '3.052rem',
+    },
+    container: {
+      center: true,
     },
   },
   plugins: [],
