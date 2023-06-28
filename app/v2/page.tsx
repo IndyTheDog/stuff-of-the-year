@@ -1,9 +1,39 @@
+'use client'
+import { useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import Message from '../components/Message'
 import Stuff from '../components/Stuff'
+import DialogData from '../models/DialogData'
+import castVote from '../actions/vote'
 
-const Home = () => {
+const Page = () => {
   const voteText = 'Vote for project'
+  const complete = () => {
+    const newData = { ...dialogData }
+    newData.open = false
+    setDialogData(newData)
+  }
+
+  const defaultDialogData: DialogData = {
+    title: '',
+    message: '',
+    closeText: 'Ok',
+    open: false,
+    complete,
+  }
+  const [dialogData, setDialogData] = useState(defaultDialogData)
+
+  const vote = async (vote: string) => {
+    const newData = { ...dialogData }
+    const data = JSON.parse(vote)
+    const result = await castVote(data)
+    newData.message = result
+    newData.title = `Voted for ${data.name}`
+    newData.open = true
+    setDialogData(newData)
+  }
+
   return (
     <>
       <Header></Header>
@@ -18,6 +48,8 @@ const Home = () => {
           stuffImage="stuff-01.jpg"
           stuffLogo="stuff-logo-01.png"
           voteText={voteText}
+          defaultVoteEnabled={true}
+          vote={vote}
         ></Stuff>
         <Stuff
           id="02"
@@ -29,6 +61,8 @@ const Home = () => {
           stuffImage="stuff-02.jpg"
           stuffLogo="stuff-logo-02.png"
           voteText={voteText}
+          defaultVoteEnabled={true}
+          vote={vote}
         ></Stuff>
         <Stuff
           id="03"
@@ -40,11 +74,14 @@ const Home = () => {
           stuffImage="stuff-03.jpg"
           stuffLogo="stuff-logo-03.png"
           voteText={voteText}
+          defaultVoteEnabled={false}
+          vote={vote}
         ></Stuff>
+        <Message data={dialogData}></Message>
       </main>
       <Footer></Footer>
     </>
   )
 }
 
-export default Home
+export default Page
