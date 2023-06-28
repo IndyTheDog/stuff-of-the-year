@@ -15,11 +15,13 @@ const Stuff = () => {
 
         // Click vote button
         cy.get(`dialog[id="vote-result-dialog"]`).should('not.be.visible')
-        cy.get(`button[id="vote-button-${id}"]`).click()
-        cy.get(`dialog[id="vote-result-dialog"]`).should('be.visible')
-        cy.get(`dialog[id="vote-result-dialog"]`).find('button').first().click()
-        cy.get(`dialog[id="vote-result-dialog"]`).should('not.be.visible')
-        cy.get(`button[id="vote-button-${id}"]`).should('be.disabled')
+        cy.get(`button[id="vote-button-${id}"]`).click().then(() => {
+            cy.get(`dialog[id="vote-result-dialog"]`).should('be.visible')
+            cy.get(`dialog[id="vote-result-dialog"]`).find('button').first().click().then(() => {
+                cy.get(`dialog[id="vote-result-dialog"]`).should('not.be.visible')
+                cy.get(`button[id="vote-button-${id}"]`).should('be.disabled')
+            })
+        })
 
     }
 
