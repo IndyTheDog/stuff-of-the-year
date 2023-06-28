@@ -12,7 +12,7 @@ describe('Home page', () => {
     home.checkRequiredElements()
 
     // Check Projects
-    const project = Stuff()
-    project.checkRequiredElements('01')
+    const stuff = Stuff()
+    stuff.checkRequiredElements('01')
   })
 })
