@@ -5,7 +5,7 @@ import Stuff from "./poms/stuff"
 describe('Home page', () => {
   it('should find required content', () => {
     // Open homepage
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3000/v1')
 
     // Check Home elements
     const home = Home()

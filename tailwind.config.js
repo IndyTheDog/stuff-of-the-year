@@ -8,17 +8,32 @@ module.exports = {
       },
       minWidth: {
         'full-lg': '1090px',
-        'full': '545px'
+        full: '545px',
       },
       maxWidth: {
-        'article': '512px',
+        article: '512px',
       },
       colors: {
-        'neutral-920': '#111111',
+        primary: {
+          bg: 'rgb(17, 17, 17)',
+          color: 'rgb(115, 115, 115)',
+        },
+        secondary: {
+          bg: 'rgb(23, 23, 23)',
+          color: 'rgb(255, 255, 255)',
+        },
+        tertiary: {
+          color: 'rgb(51, 65, 85)',
+          bg: 'rgb(203, 213, 225)',
+        },
+        title: 'rgb(234, 179, 8)',
       },
       spacing: {
-        'article': '37.5rem',
-      }
+        article: '37.5rem',
+      },
+    },
+    fontFamily: {
+      primary: ['Montserrat'],
     },
     fontSize: {
       sm: '0.875rem',

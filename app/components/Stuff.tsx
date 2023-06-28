@@ -1,4 +1,6 @@
+'use client'
 import Image from 'next/image'
+import { MouseEvent, useState } from 'react'
 
 const Stuff = (props: {
   id: string
@@ -10,10 +12,29 @@ const Stuff = (props: {
   stuffImage: string
   stuffLogo: string
   voteText: string
+  defaultVoteEnabled: boolean
+  vote: (vote: string) => void
 }) => {
+  const buttonEnabledClass =
+    'bg-tertiary-bg text-tertiary-color border-tertiary-color hover:bg-tertiary-color hover:text-tertiary-bg hover:border-tertiary-bg'
+  const buttonDisabledClass = 'bg-tertiary-color text-tertiary-bg border-tertiary-bg'
+
+  const [voteEnabled, setVoteEnabled] = useState(props.defaultVoteEnabled)
+  const [buttonClass, setButtonClass] = useState(
+    props.defaultVoteEnabled ? buttonEnabledClass : buttonDisabledClass
+  )
+
+  const castStuffVote = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    setVoteEnabled(false)
+    setButtonClass(buttonDisabledClass)
+    const target = event.target as HTMLButtonElement
+    await props.vote(target.value)
+  }
+
   return (
     <article
-      className="relative flex flex-col bg-neutral-900 rounded-xl h-article max-w-article"
+      className="relative flex flex-col bg-secondary-bg rounded-xl h-article max-w-article"
       id={`stuff-item-${props.id}`}
       key={`stuff-item-${props.id}`}
     >
@@ -38,21 +59,26 @@ const Stuff = (props: {
         id={`content-stuff-item-${props.id}`}
       >
         <span
-          className="text-yellow-500 text-lg font-semibold text-justify"
+          className="text-title text-lg font-semibold text-justify"
           id={`stuff-title-${props.id}`}
         >{`${props.title} by ${props.ownerName}`}</span>
         <span
-          className="text-neutral-500 pt-3 text-sm font-medium text-justify leading-4 grow"
+          className="text-primary-color pt-3 text-sm font-medium text-justify leading-4 grow"
           id={`stuff-description-${props.id}`}
         >
           {props.description}
         </span>
-        <div className="text-white py-3 font-bold flex justify-between items-center">
+        <div className="text-secondary-color py-3 font-bold flex justify-between items-center">
           <span className="pr-10">{props.stuffType}</span>
           <button
-            className="grow text-sm bg-slate-300 text-slate-700 border-slate-700 rounded-xl px-5 py-2 hover:bg-slate-700 hover:text-slate-300 hover:border-slate-300"
+            className={`grow text-sm rounded-xl px-5 py-2 ${buttonClass}`}
             id={`vote-button-${props.id}`}
-            value={`vote-${props.id}`}
+            value={JSON.stringify({
+              id: `vote-${props.id}`,
+              name: props.title,
+            })}
+            onClick={castStuffVote}
+            disabled={!voteEnabled}
           >
             {props.voteText}
           </button>

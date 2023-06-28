@@ -19,6 +19,12 @@ services:
       - $PWD/app:/app/app:ro
       - $PWD/public:/app/public:ro
       - $PWD/styles:/app/styles:ro
+      - $PWD/package.json:/app/package.json
+      - $PWD/tsconfig.json:/app/tsconfig.json
+      - $PWD/next.config.js:/app/next.config.js
+      - $PWD/tailwind.config.js:/app/tailwind.config.js
+      - $PWD/postcss.config.js:/app/postcss.config.js
+      - $PWD/yarn.lock:/app/yarn.lock
   # The Cypress components testing service
   cypress-components:
     build:
@@ -29,12 +35,20 @@ services:
     environment:
       - CYPRESS_VIDEO=false
       - CYPRESS_SCREENSHOT_ON_RUN_FAILURE=false
-      - TEST_TYPE=component:headless
+      - TEST_TYPE=component
+      - DISPLAY
     volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
       - $PWD/cypress:/app/cypress:ro
       - $PWD/app:/app/app:ro
       - $PWD/public:/app/public:ro
       - $PWD/styles:/app/styles:ro
+      - $PWD/package.json:/app/package.json
+      - $PWD/tsconfig.json:/app/tsconfig.json
+      - $PWD/next.config.js:/app/next.config.js
+      - $PWD/tailwind.config.js:/app/tailwind.config.js
+      - $PWD/postcss.config.js:/app/postcss.config.js
+      - $PWD/yarn.lock:/app/yarn.lock
   # Run the next JS application in dev mode
   dev:
     build:
@@ -54,6 +68,7 @@ services:
       - $PWD/styles:/app/styles:ro
       - $PWD/package.json:/app/package.json
       - $PWD/tsconfig.json:/app/tsconfig.json
+      - $PWD/next.config.js:/app/next.config.js
       - $PWD/tailwind.config.js:/app/tailwind.config.js
       - $PWD/postcss.config.js:/app/postcss.config.js
       - $PWD/yarn.lock:/app/yarn.lock

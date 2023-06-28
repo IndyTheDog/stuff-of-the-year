@@ -3,7 +3,7 @@ import '../../styles/header.css'
 
 const Header = () => {
     return (
-        <header className="award-title-bg min-w-full flex flex-col items-center text-white">
+        <header className="award-title-bg min-w-full flex flex-col items-center text-secondary-color">
         <Image
           className="py-28"
           src={'/images/award-logo-2023.png'}
@@ -12,13 +12,13 @@ const Header = () => {
           alt="Award logo"
           id="award-logo"
         />
-        <div className="award-main-bg min-w-full w-full text-white flex flex-col items-center text-center">
+        <div className="award-main-bg min-w-full w-full flex flex-col items-center text-center">
           <h1 id="award-title" className="pt-10 w-2/3 text-4xl font-bold">
             People&apos;s Choice Awards for
           </h1>
           <h2
             id="award-subtitle"
-            className="w-2/3 text-4xl font-medium text-yellow-500"
+            className="w-2/3 text-4xl font-medium text-title"
           >
             Project of the Year 2023
           </h2>

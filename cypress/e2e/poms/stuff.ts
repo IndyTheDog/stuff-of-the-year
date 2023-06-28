@@ -12,6 +12,15 @@ const Stuff = () => {
         cy.get(`article[id="stuff-item-${id}"]`).find(`img[id="stuff-logo-${id}"]`).should('have.length', 1)
         // Content should have voting button
         cy.get(`article[id="stuff-item-${id}"]`).find(`button[id="vote-button-${id}"]`).should('have.length', 1)
+
+        // Click vote button
+        cy.get(`dialog[id="vote-result-dialog"]`).should('not.be.visible')
+        cy.get(`button[id="vote-button-${id}"]`).click()
+        cy.get(`dialog[id="vote-result-dialog"]`).should('be.visible')
+        cy.get(`dialog[id="vote-result-dialog"]`).find('button').first().click()
+        cy.get(`dialog[id="vote-result-dialog"]`).should('not.be.visible')
+        cy.get(`button[id="vote-button-${id}"]`).should('be.disabled')
+
     }
 
     return {
