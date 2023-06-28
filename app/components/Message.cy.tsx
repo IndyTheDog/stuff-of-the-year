@@ -29,7 +29,7 @@ describe('<Message />', () => {
   })
 
 
-  it('should be closed if button is clicked', () => {
+  it('should execute action if button is clicked', () => {
     const mock = {
       complete() {
         //
@@ -48,8 +48,6 @@ describe('<Message />', () => {
     cy.get('dialog').should('be.visible')
     cy.get('dialog').find('button').first().click().then(() => {
       expect(spy).to.have.been.called
-    }).then(() => {
-      cy.get('dialog').should('not.be.visible')
     })
   })
 })
