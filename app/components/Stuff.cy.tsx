@@ -4,7 +4,8 @@ describe('<Stuff />', () => {
   it('button should not be clickable if vote is disabled', () => {
     cy.mount(
       <Stuff
-        id={'01'}
+        id={1}
+        assetId="01"
         ownerName={'Super Dev'}
         title={'Awesome Condo Project Name'}
         description={'abcdefg '.repeat(12)}
@@ -13,7 +14,7 @@ describe('<Stuff />', () => {
         stuffImage={'stuff-01.jpg'}
         stuffLogo={'stuff-logo-01.png'}
         voteText={'Vote for stuff'}
-        defaultVoteEnabled={false}
+        voteEnabled={false}
         vote={function (vote: string): void {
           console.log(vote)
         }}
@@ -26,7 +27,8 @@ describe('<Stuff />', () => {
   it('button should be clickable if vote is enabled', () => {
     cy.mount(
       <Stuff
-        id={'01'}
+        id={1}
+        assetId="01"
         ownerName={'Super Dev'}
         title={'Awesome Condo Project Name'}
         description={'abcdefg '.repeat(12)}
@@ -35,7 +37,7 @@ describe('<Stuff />', () => {
         stuffImage={'stuff-01.jpg'}
         stuffLogo={'stuff-logo-01.png'}
         voteText={'Vote for stuff'}
-        defaultVoteEnabled={true}
+        voteEnabled={true}
         vote={function (vote: string): void {
           console.log(vote)
         }}
@@ -55,7 +57,8 @@ describe('<Stuff />', () => {
 
     cy.mount(
       <Stuff
-        id={'01'}
+        id={1}
+        assetId="01"
         ownerName={'Super Dev'}
         title={'Awesome Condo Project Name'}
         description={'abcdefg '.repeat(12)}
@@ -64,7 +67,7 @@ describe('<Stuff />', () => {
         stuffImage={'stuff-01.jpg'}
         stuffLogo={'stuff-logo-01.png'}
         voteText={'Vote for stuff'}
-        defaultVoteEnabled={true}
+        voteEnabled={true}
         vote={spy}
       ></Stuff>
     )
@@ -73,9 +76,6 @@ describe('<Stuff />', () => {
       .click()
       .then(() => {
         expect(spy).to.have.been.called
-      })
-      .then(() => {
-        cy.get('button').should('be.disabled')
       })
   })
 })

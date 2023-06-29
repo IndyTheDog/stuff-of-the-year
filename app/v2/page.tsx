@@ -9,7 +9,20 @@ import castVote from '../actions/vote'
 
 const Page = () => {
   const voteText = 'Vote for project'
-  const complete = () => {
+  const voteStepOne = (vote: string) => {
+    const newData = { ...dialogData }
+    const data = JSON.parse(vote)
+    setVoteData(data)
+    newData.message = `Do you want to vote for "${data.name}"?`
+    newData.title = `Cast your vote`
+    newData.open = true
+    setDialogData(newData)
+  }
+
+  const voteStepTwo = async (choice: boolean) => {
+    if (choice) {
+      await castVote(voteData)
+    }
     const newData = { ...dialogData }
     newData.open = false
     setDialogData(newData)
@@ -18,21 +31,13 @@ const Page = () => {
   const defaultDialogData: DialogData = {
     title: '',
     message: '',
-    closeText: 'Ok',
+    controlA: 'Yes',
+    controlB: 'No',
     open: false,
-    complete,
+    voteStepTwo,
   }
   const [dialogData, setDialogData] = useState(defaultDialogData)
-
-  const vote = async (vote: string) => {
-    const newData = { ...dialogData }
-    const data = JSON.parse(vote)
-    const result = await castVote(data)
-    newData.message = result
-    newData.title = `Voted for ${data.name}`
-    newData.open = true
-    setDialogData(newData)
-  }
+  const [voteData, setVoteData] = useState({ id: '', name: '' })
 
   return (
     <>
@@ -48,8 +53,8 @@ const Page = () => {
           stuffImage="stuff-01.jpg"
           stuffLogo="stuff-logo-01.png"
           voteText={voteText}
-          defaultVoteEnabled={true}
-          vote={vote}
+          voteEnabled={true}
+          vote={voteStepOne}
         ></Stuff>
         <Stuff
           id="02"
@@ -61,8 +66,8 @@ const Page = () => {
           stuffImage="stuff-02.jpg"
           stuffLogo="stuff-logo-02.png"
           voteText={voteText}
-          defaultVoteEnabled={true}
-          vote={vote}
+          voteEnabled={true}
+          vote={voteStepOne}
         ></Stuff>
         <Stuff
           id="03"
@@ -74,8 +79,8 @@ const Page = () => {
           stuffImage="stuff-03.jpg"
           stuffLogo="stuff-logo-03.png"
           voteText={voteText}
-          defaultVoteEnabled={false}
-          vote={vote}
+          voteEnabled={false}
+          vote={voteStepOne}
         ></Stuff>
         <Message data={dialogData}></Message>
       </main>

@@ -1,8 +1,11 @@
+import VoteData from "./VoteData"
 
 export default interface DialogData {
     title: string
     message: string
-    closeText: string
+    controlA: string
+    controlB: string
     open: boolean
-    complete: () => void
+    voteStepTwo: (data: VoteData) => void
+    data: VoteData
 }

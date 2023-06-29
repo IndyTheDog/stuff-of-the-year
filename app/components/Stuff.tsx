@@ -1,9 +1,10 @@
 'use client'
 import Image from 'next/image'
-import { MouseEvent, useState } from 'react'
+import { MouseEvent } from 'react'
 
 const Stuff = (props: {
-  id: string
+  id: number
+  assetId: string
   ownerName: string
   title: string
   description: string
@@ -12,31 +13,30 @@ const Stuff = (props: {
   stuffImage: string
   stuffLogo: string
   voteText: string
-  defaultVoteEnabled: boolean
+  voteEnabled: boolean
   vote: (vote: string) => void
 }) => {
   const buttonEnabledClass =
     'bg-tertiary-bg text-tertiary-color border-tertiary-color hover:bg-tertiary-color hover:text-tertiary-bg hover:border-tertiary-bg'
-  const buttonDisabledClass = 'bg-tertiary-color text-tertiary-bg border-tertiary-bg'
+  const buttonDisabledClass =
+    'bg-tertiary-color text-tertiary-bg border-tertiary-bg'
 
-  const [voteEnabled, setVoteEnabled] = useState(props.defaultVoteEnabled)
-  const [buttonClass, setButtonClass] = useState(
-    props.defaultVoteEnabled ? buttonEnabledClass : buttonDisabledClass
-  )
+  const voteValue = JSON.stringify({
+    id: +props.id,
+    name: props.title,
+  })
 
-  const castStuffVote = async (event: MouseEvent<HTMLButtonElement>) => {
+  const castStuffVote = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    setVoteEnabled(false)
-    setButtonClass(buttonDisabledClass)
     const target = event.target as HTMLButtonElement
-    await props.vote(target.value)
+    props.vote(target.value)
   }
 
   return (
     <article
       className="relative flex flex-col bg-secondary-bg rounded-xl h-article max-w-article"
-      id={`stuff-item-${props.id}`}
-      key={`stuff-item-${props.id}`}
+      id={`stuff-item-${props.assetId}`}
+      key={`stuff-item-${props.assetId}`}
     >
       <Image
         className="rounded-t-xl"
@@ -44,7 +44,7 @@ const Stuff = (props: {
         width={512}
         height={256}
         alt={`stuff of ${props.ownerName}.`}
-        id={`stuff-image-${props.id}`}
+        id={`stuff-image-${props.assetId}`}
       />
       <Image
         className="absolute right-3 top-3"
@@ -52,33 +52,32 @@ const Stuff = (props: {
         width={80}
         height={25}
         alt={`stuff of ${props.ownerName}.`}
-        id={`stuff-logo-${props.id}`}
+        id={`stuff-logo-${props.assetId}`}
       />
       <div
         className="h-full px-5 pt-5 flex flex-col"
-        id={`content-stuff-item-${props.id}`}
+        id={`content-stuff-item-${props.assetId}`}
       >
         <span
           className="text-title text-lg font-semibold text-justify"
-          id={`stuff-title-${props.id}`}
+          id={`stuff-title-${props.assetId}`}
         >{`${props.title} by ${props.ownerName}`}</span>
         <span
           className="text-primary-color pt-3 text-sm font-medium text-justify leading-4 grow"
-          id={`stuff-description-${props.id}`}
+          id={`stuff-description-${props.assetId}`}
         >
           {props.description}
         </span>
         <div className="text-secondary-color py-3 font-bold flex justify-between items-center">
           <span className="pr-10">{props.stuffType}</span>
           <button
-            className={`grow text-sm rounded-xl px-5 py-2 ${buttonClass}`}
-            id={`vote-button-${props.id}`}
-            value={JSON.stringify({
-              id: `vote-${props.id}`,
-              name: props.title,
-            })}
+            className={`grow text-sm rounded-xl px-5 py-2 ${
+              props.voteEnabled ? buttonEnabledClass : buttonDisabledClass
+            }`}
+            id={`vote-button-${props.assetId}`}
+            value={voteValue}
             onClick={castStuffVote}
-            disabled={!voteEnabled}
+            disabled={!props.voteEnabled}
           >
             {props.voteText}
           </button>
