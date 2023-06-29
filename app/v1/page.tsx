@@ -10,7 +10,7 @@ import VoteData from '../models/VoteData'
 
 const Page = () => {
   const voteText = 'Vote for project'
-  const [voteEnabled, setVoteEnabled] = useState([true, true, true])
+  const [voteEnabled, setVoteEnabled] = useState(true)
 
   const voteStepOne = (vote: string) => {
     const data = JSON.parse(vote)
@@ -25,9 +25,7 @@ const Page = () => {
   const voteStepTwo = async (data: VoteData) => {
     if (data.id >= 0) {
       await castVote(data)
-      const newVoteEnabled = [...voteEnabled]
-      newVoteEnabled[data.id] = false
-      setVoteEnabled(newVoteEnabled)
+      setVoteEnabled(false)
     }
     const newData = { ...dialogData }
     newData.open = false
@@ -60,7 +58,7 @@ const Page = () => {
           stuffImage="stuff-01.jpg"
           stuffLogo="stuff-logo-01.png"
           voteText={voteText}
-          voteEnabled={voteEnabled[0]}
+          voteEnabled={voteEnabled}
           vote={voteStepOne}
         ></Stuff>
         <Stuff
@@ -74,7 +72,7 @@ const Page = () => {
           stuffImage="stuff-02.jpg"
           stuffLogo="stuff-logo-02.png"
           voteText={voteText}
-          voteEnabled={voteEnabled[1]}
+          voteEnabled={voteEnabled}
           vote={voteStepOne}
         ></Stuff>
         <Stuff
@@ -88,7 +86,7 @@ const Page = () => {
           stuffImage="stuff-03.jpg"
           stuffLogo="stuff-logo-03.png"
           voteText={voteText}
-          voteEnabled={voteEnabled[2]}
+          voteEnabled={voteEnabled}
           vote={voteStepOne}
         ></Stuff>
         <Message data={dialogData}></Message>
