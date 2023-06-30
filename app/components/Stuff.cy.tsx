@@ -1,19 +1,25 @@
-import Stuff from './Stuff'
+import { StuffData } from '../models/StuffData'
+import Stuff from './Stuffv1'
 
 describe('<Stuff />', () => {
+  const stuffData: StuffData = {
+    id: 0,
+    assetId: '01',
+    description:
+      'Prepare to meet luxury houses, new projects INSPIRED BY BLED CASTLE ,SLOVENIA in the midst of modern atmosphere close to nature with beautiful gardens around the project. with beautiful scenery with electric wires to the ground for the whole project luxury club house Large swimming pool and fully equipped fitness center with RELAX SPACE for the whole family to truly relax.',
+    location: 'Bangkok',
+    stuffType: 'House',
+    ownerName: 'SC ASSET',
+    title: 'Bangkok Boulevard Signature Chaengwattana',
+    stuffImage: 'stuff-01.jpg',
+    stuffLogo: 'stuff-logo-01.png',
+    voteText: 'Vote for project',
+  }
+
   it('button should not be clickable if vote is disabled', () => {
     cy.mount(
       <Stuff
-        id={1}
-        assetId="01"
-        ownerName={'Super Dev'}
-        title={'Awesome Condo Project Name'}
-        description={'abcdefg '.repeat(12)}
-        stuffType={'House'}
-        location={'World'}
-        stuffImage={'stuff-01.jpg'}
-        stuffLogo={'stuff-logo-01.png'}
-        voteText={'Vote for stuff'}
+        data={stuffData}
         voteEnabled={false}
         vote={function (vote: string): void {
           console.log(vote)
@@ -27,16 +33,7 @@ describe('<Stuff />', () => {
   it('button should be clickable if vote is enabled', () => {
     cy.mount(
       <Stuff
-        id={1}
-        assetId="01"
-        ownerName={'Super Dev'}
-        title={'Awesome Condo Project Name'}
-        description={'abcdefg '.repeat(12)}
-        stuffType={'House'}
-        location={'World'}
-        stuffImage={'stuff-01.jpg'}
-        stuffLogo={'stuff-logo-01.png'}
-        voteText={'Vote for stuff'}
+        data={stuffData}
         voteEnabled={true}
         vote={function (vote: string): void {
           console.log(vote)
@@ -55,22 +52,7 @@ describe('<Stuff />', () => {
     }
     const spy = cy.spy(mock, 'vote')
 
-    cy.mount(
-      <Stuff
-        id={1}
-        assetId="01"
-        ownerName={'Super Dev'}
-        title={'Awesome Condo Project Name'}
-        description={'abcdefg '.repeat(12)}
-        stuffType={'House'}
-        location={'World'}
-        stuffImage={'stuff-01.jpg'}
-        stuffLogo={'stuff-logo-01.png'}
-        voteText={'Vote for stuff'}
-        voteEnabled={true}
-        vote={spy}
-      ></Stuff>
-    )
+    cy.mount(<Stuff data={stuffData} voteEnabled={true} vote={spy}></Stuff>)
 
     cy.get('button')
       .click()
