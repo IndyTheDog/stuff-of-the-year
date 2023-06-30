@@ -1,7 +1,7 @@
 import { StuffData } from '../models/StuffData'
-import Stuff from './Stuffv1'
+import Stuff from './Stuffv2'
 
-describe('<Stuff />', () => {
+describe('<Stuffv2 />', () => {
   const stuffData: StuffData = {
     id: 0,
     assetId: '01',
