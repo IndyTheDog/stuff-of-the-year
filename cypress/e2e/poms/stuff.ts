@@ -16,7 +16,13 @@ const Stuff = () => {
         // Click vote button
         cy.get(`dialog[id="vote-result-dialog"]`).should('not.be.visible')
         cy.get(`button[id="vote-button-${id}"]`).click().then(() => {
-            cy.get(`dialog[id="vote-result-dialog"]`).wait(5000).should('be.visible')
+            try {
+                cy.get(`dialog[id="vote-result-dialog"]`).should('be.visible')
+            } catch {
+                cy.wait(1000).then(() => {
+                    cy.get(`dialog[id="vote-result-dialog"]`).should('be.visible')
+                })
+            }
             cy.get(`dialog[id="vote-result-dialog"]`).find('button').first().click().then(() => {
                 cy.get(`dialog[id="vote-result-dialog"]`).should('not.be.visible')
                 cy.get(`button[id="vote-button-${id}"]`).should('be.disabled')

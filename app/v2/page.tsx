@@ -89,7 +89,7 @@ const Page = () => {
   const stuffElements: JSX.Element[] = []
   stuffData.forEach((stuff) => {
     stuffElements.push(
-      <Stuff data={stuff} voteEnabled={voteEnabled} vote={voteStepOne}></Stuff>
+      <Stuff data={stuff} voteEnabled={voteEnabled} vote={voteStepOne} key={`stuff-key-${stuff.id}`}></Stuff>
     )
   })
 
