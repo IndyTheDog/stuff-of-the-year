@@ -1,5 +1,4 @@
 import safeShouldBeVisible from '../../cypress/e2e/utils'
-import getStuffData from '../actions/getStuffData'
 import { StuffData } from '../models/StuffData'
 import VoteData from '../models/VoteData'
 import StuffElements from './StuffElements'
