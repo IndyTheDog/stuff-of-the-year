@@ -15,7 +15,7 @@ const Home = () => {
           </Link>{' '}
         </li>
         <li>
-          <Link href={'/v2'} rel="noopener noreferrer" target="_blank">
+          <Link href={'/v3'} rel="noopener noreferrer" target="_blank">
             Server data Stuff
           </Link>{' '}
         </li>
