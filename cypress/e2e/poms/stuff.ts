@@ -1,3 +1,5 @@
+import safeShouldBeVisible from "../utils"
+
 const Stuff = () => {
     const checkRequiredElements = (id: string) => {
         cy.get(`article[id="stuff-item-${id}"]`).should('exist')
@@ -16,15 +18,9 @@ const Stuff = () => {
         // Click vote button
         cy.get(`dialog[id="vote-result-dialog"]`).should('not.be.visible')
         cy.get(`button[id="vote-button-${id}"]`).click().then(() => {
-            try {
-                cy.get(`dialog[id="vote-result-dialog"]`).should('be.visible')
-            } catch {
-                cy.wait(1000).then(() => {
-                    cy.get(`dialog[id="vote-result-dialog"]`).should('be.visible')
-                })
-            }
+            safeShouldBeVisible('dialog[id="vote-result-dialog"]')
             cy.get(`dialog[id="vote-result-dialog"]`).find('button').first().click().then(() => {
-                cy.get(`dialog[id="vote-result-dialog"]`).should('not.be.visible')
+                safeShouldBeVisible('dialog[id="vote-result-dialog"]', false)
                 cy.get(`button[id="vote-button-${id}"]`).should('be.disabled')
             })
         })
