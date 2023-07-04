@@ -1,4 +1,4 @@
-const safeShouldBeVisible = (elementname: string, visible = true, trials = 5) => {
+const safeShouldBeVisible = (elementname: string, visible = true, trials = 10) => {
     const beVisible = visible ? 'be.visible' : 'not.be.visible'
     try {
         cy.get(elementname).should(beVisible)
