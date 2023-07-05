@@ -1,4 +1,5 @@
 import { StuffData } from "../models/StuffData"
+import { getImageUrlFromGoogleDrive } from "./googleDriveImage"
 
 const StuffProvider = {
 
@@ -14,12 +15,6 @@ const StuffProvider = {
         result.shift()
         return result
     },
-    getImageUrlFromGoogleDrive(googleDriveUrl: string): string {
-        if (googleDriveUrl.indexOf('drive.google.com') === -1) return `${googleDriveUrl}`
-        const IMAGE_URL_FORMAT = 'https://drive.google.com/uc?export=view&id='
-        const googleImageId = googleDriveUrl.split('file/d/')[1].split('/view')[0]
-        return `${IMAGE_URL_FORMAT}${googleImageId}`
-    },
     async getStuffData(voteText: string): Promise<StuffData[]> {
         const csvData = await this.getCsvData()
         const stuffData: StuffData[] = []
@@ -33,8 +28,8 @@ const StuffProvider = {
                 ownerName: data[3],
                 location: data[4],
                 stuffType: data[5],
-                stuffLogo: this.getImageUrlFromGoogleDrive(data[6]),
-                stuffImage: this.getImageUrlFromGoogleDrive(data[7]),
+                stuffLogo: getImageUrlFromGoogleDrive(data[6]),
+                stuffImage: getImageUrlFromGoogleDrive(data[7]),
                 stuffVideo: data[8],
                 voteText
             })
