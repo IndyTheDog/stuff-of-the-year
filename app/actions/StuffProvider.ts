@@ -5,6 +5,7 @@ const StuffProvider = {
     async getCsvData(): Promise<string[][]> {
         const dataUrl = process.env.PROJECT_2023_TH_DATA_URL ?? ""
         const dataExpiry = process.env.PROJECT_2023_TH_DATA_EXPIRY ? +process.env.PROJECT_2023_TH_DATA_EXPIRY : 600
+        console.log(dataUrl)
         if (dataUrl === "") return Promise.resolve([])
         const response = await fetch(dataUrl, { next: { revalidate: dataExpiry } })
         const csvData = await response.text()
