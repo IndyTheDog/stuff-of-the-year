@@ -11,12 +11,14 @@ const StuffProvider = {
         const result = csvData.split('\r\n').map(line => line.split("\t"))
         // Remove the header lint
         result.shift()
+        console.log(result)
         return result
     },
     getImageUrlFromGoogleDrive(googleDriveUrl: string): string {
-        if(googleDriveUrl.indexOf('drive.google.com') === -1) return googleDriveUrl
+        if(googleDriveUrl.indexOf('drive.google.com') === -1) return `${googleDriveUrl}`
         const IMAGE_URL_FORMAT = 'https://drive.google.com/uc?export=view&id='
         const googleImageId = googleDriveUrl.split('file/d/')[1].split('/view')[0]
+        console.log(googleImageId)
         return `${IMAGE_URL_FORMAT}${googleImageId}`
     },
     async getStuffData(voteText: string): Promise<StuffData[]> {

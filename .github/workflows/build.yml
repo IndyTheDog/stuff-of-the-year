@@ -33,3 +33,25 @@ jobs:
 
       - name: E2E testing
         run: yarn e2e:headless
+  build:
+    name: Build app
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - name: Using Node.JS ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Building app
+        run: yarn --frozen-lockfile
+
+      - name: Components testing
+        run: yarn build

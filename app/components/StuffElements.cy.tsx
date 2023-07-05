@@ -34,6 +34,7 @@ describe('StuffElements', () => {
         title: 'Title',
         stuffImage: 'stuff-01.jpg',
         stuffLogo: 'stuff-logo-01.png',
+        stuffVideo: '',
         voteText,
       },
     ]

@@ -11,8 +11,8 @@ describe('<Stuffv2 />', () => {
     stuffType: 'House',
     ownerName: 'SC ASSET',
     title: 'Bangkok Boulevard Signature Chaengwattana',
-    stuffImage: 'stuff-01.jpg',
-    stuffLogo: 'stuff-logo-01.png',
+    stuffImage: '/images/stuff/stuff-01.jpg',
+    stuffLogo: '/images/stuff/stuff-logo-01.png',
     voteText: 'Vote for project',
     stuffVideo: ''
   }

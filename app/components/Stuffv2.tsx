@@ -44,7 +44,7 @@ const Stuff = (props: {
     >
       <Image
         className="rounded-t-xl"
-        src={`/images/stuff/${stuffImage}`}
+        src={`${stuffImage}`}
         width={512}
         height={256}
         alt={`stuff of ${ownerName}.`}
@@ -52,7 +52,7 @@ const Stuff = (props: {
       />
       <Image
         className="absolute right-3 top-3"
-        src={`/images/stuff/${stuffLogo}`}
+        src={`${stuffLogo}`}
         width={80}
         height={25}
         alt={`stuff of ${ownerName}.`}

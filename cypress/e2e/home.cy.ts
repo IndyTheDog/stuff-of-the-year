@@ -13,7 +13,7 @@ describe('Home page', () => {
 
     // Check Projects
     const stuffv1 = Stuff()
-    stuffv1.checkRequiredElements('01')
+    stuffv1.checkRequiredElements('1')
   })
 
   it('should find required content and vote on v2', () => {
@@ -26,7 +26,7 @@ describe('Home page', () => {
 
     // Check Projects
     const stuffv2 = Stuff()
-    stuffv2.checkRequiredElements('01')
+    stuffv2.checkRequiredElements('1')
   })
 
   it('should find required content and vote on v3', () => {
@@ -39,6 +39,6 @@ describe('Home page', () => {
 
     // Check Projects
     const stuffv2 = Stuff()
-    stuffv2.checkRequiredElements('01')
+    stuffv2.checkRequiredElements('1')
   })
 })

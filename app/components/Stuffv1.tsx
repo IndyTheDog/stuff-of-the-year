@@ -35,8 +35,8 @@ const Stuff = (props: {
   return (
     <article
       className="relative flex flex-col bg-secondary-bg rounded-xl h-article max-w-article"
-      id={`stuff-item-${props.assetId}`}
-      key={`stuff-item-${props.assetId}`}
+      id={`stuff-item-${props.id}`}
+      key={`stuff-item-${props.id}`}
     >
       <Image
         className="rounded-t-xl"
@@ -44,7 +44,7 @@ const Stuff = (props: {
         width={512}
         height={256}
         alt={`stuff of ${props.ownerName}.`}
-        id={`stuff-image-${props.assetId}`}
+        id={`stuff-image-${props.id}`}
       />
       <Image
         className="absolute right-3 top-3"
@@ -52,19 +52,19 @@ const Stuff = (props: {
         width={80}
         height={25}
         alt={`stuff of ${props.ownerName}.`}
-        id={`stuff-logo-${props.assetId}`}
+        id={`stuff-logo-${props.id}`}
       />
       <div
         className="h-full px-5 pt-5 flex flex-col"
-        id={`content-stuff-item-${props.assetId}`}
+        id={`content-stuff-item-${props.id}`}
       >
         <span
           className="text-title text-lg font-semibold text-justify"
-          id={`stuff-title-${props.assetId}`}
+          id={`stuff-title-${props.id}`}
         >{`${props.title} by ${props.ownerName}`}</span>
         <span
           className="text-primary-color pt-3 text-sm font-medium text-justify leading-4 grow"
-          id={`stuff-description-${props.assetId}`}
+          id={`stuff-description-${props.id}`}
         >
           {props.description}
         </span>
@@ -74,7 +74,7 @@ const Stuff = (props: {
             className={`grow text-sm rounded-xl px-5 py-2 ${
               props.voteEnabled ? buttonEnabledClass : buttonDisabledClass
             }`}
-            id={`vote-button-${props.assetId}`}
+            id={`vote-button-${props.id}`}
             value={voteValue}
             onClick={castStuffVote}
             disabled={!props.voteEnabled}

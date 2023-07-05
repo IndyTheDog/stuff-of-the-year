@@ -17,6 +17,7 @@ e2e:
 	docker-compose up -d cypress-e2e
 
 dev:
+	rm -Rf .next/cache
 	docker-compose up -d dev
 
 all: dev e2e test
