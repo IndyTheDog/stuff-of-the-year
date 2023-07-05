@@ -22,6 +22,7 @@ const stuffData: StuffData[] = [
     title: 'Bangkok Boulevard Signature Chaengwattana',
     stuffImage: 'stuff-01.jpg',
     stuffLogo: 'stuff-logo-01.png',
+    stuffVideo: '',
     voteText,
   },
   {
@@ -35,6 +36,7 @@ const stuffData: StuffData[] = [
     title: 'Bangkok Boulevard Changwattana 2',
     stuffImage: 'stuff-02.jpg',
     stuffLogo: 'stuff-logo-02.png',
+    stuffVideo: '',
     voteText,
   },
   {
@@ -48,6 +50,7 @@ const stuffData: StuffData[] = [
     title: 'Dusit Residences',
     stuffImage: 'stuff-03.jpg',
     stuffLogo: 'stuff-logo-03.png',
+    stuffVideo: '',
     voteText,
   },
 ]

@@ -3,7 +3,7 @@
 import VoteData from "../models/VoteData"
 
 const castVote = async (value: VoteData) => {
-    console.log(value)
+    void (value)
     return "Thank you for your vote."
 }
 

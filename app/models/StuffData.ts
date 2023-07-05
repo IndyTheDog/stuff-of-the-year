@@ -8,5 +8,6 @@ export interface StuffData {
     title: string
     stuffImage: string
     stuffLogo: string
+    stuffVideo: string
     voteText: string
 }

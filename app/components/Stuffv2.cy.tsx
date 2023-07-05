@@ -14,6 +14,7 @@ describe('<Stuffv2 />', () => {
     stuffImage: 'stuff-01.jpg',
     stuffLogo: 'stuff-logo-01.png',
     voteText: 'Vote for project',
+    stuffVideo: ''
   }
 
   it('button should not be clickable if vote is disabled', () => {
