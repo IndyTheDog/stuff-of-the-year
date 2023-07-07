@@ -1,5 +1,6 @@
 import { StuffData } from "../models/StuffData"
 import { getImageUrlFromGoogleDrive } from "./googleDriveImage"
+import { getYoutubeEmbeddedUrlFromFullUrl } from "./youtubeUrl"
 
 const StuffProvider = {
 
@@ -22,7 +23,7 @@ const StuffProvider = {
             void (data)
             stuffData.push({
                 id: index,
-                assetId: data[0],
+                assetId: `${index}`,
                 title: data[1],
                 description: data[2],
                 ownerName: data[3],
@@ -30,7 +31,7 @@ const StuffProvider = {
                 stuffType: data[5],
                 stuffLogo: getImageUrlFromGoogleDrive(data[6]),
                 stuffImage: getImageUrlFromGoogleDrive(data[7]),
-                stuffVideo: data[8],
+                stuffVideo: getYoutubeEmbeddedUrlFromFullUrl(data[8]),
                 voteText
             })
         })

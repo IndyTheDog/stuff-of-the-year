@@ -19,6 +19,11 @@ const Home = () => {
             Server data Stuff
           </Link>{' '}
         </li>
+        <li>
+          <Link href={'/v4'} rel="noopener noreferrer" target="_blank">
+            Server data Stuff with optional Video
+          </Link>{' '}
+        </li>
       </ol>
     </main>
   )

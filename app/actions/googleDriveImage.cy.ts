@@ -12,4 +12,10 @@ describe('GoogleDriveImage', () => {
         const googleDriveImageUrl = getImageUrlFromGoogleDrive(googleDriveUrl)
         expect(googleDriveImageUrl).to.equal(googleDriveUrl)
     })
+
+    it('returns original URL if not supported Google Drive URL', () => {
+        const googleDriveUrl = 'https://drive.google.com/file/d/1234567890-abcdefgh/draw?usp=drive_link'
+        const googleDriveImageUrl = getImageUrlFromGoogleDrive(googleDriveUrl)
+        expect(googleDriveImageUrl).to.equal(googleDriveUrl)
+    })
 })

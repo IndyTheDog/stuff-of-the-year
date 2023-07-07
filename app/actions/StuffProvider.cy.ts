@@ -11,7 +11,7 @@ describe('StuffProvider', () => {
         const voteForProject = 'Vote for project'
         const data = await StuffProvider.getStuffData(voteForProject)
         expect(data).to.be.of.length(2)
-        expect(data[0].assetId).to.be.equal('01')
+        expect(data[0].assetId).to.be.equal('0')
         expect(data[0].title).to.be.equal('Name 1')
         expect(data[0].description).to.be.equal('Description 1')
         expect(data[0].ownerName).to.be.equal('Developer 1')

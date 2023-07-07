@@ -9,11 +9,11 @@ stop:
 	docker-compose down
 
 test:
-	xhost +local:*
+	xhost +local:* >/dev/null
 	docker-compose up -d cypress-components
 
 e2e:
-	xhost +local:*
+	xhost +local:* >/dev/null
 	docker-compose up -d cypress-e2e
 
 dev:
