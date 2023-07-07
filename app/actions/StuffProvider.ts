@@ -35,7 +35,6 @@ const StuffProvider = {
                 voteText
             })
         })
-        console.log(stuffData)
         return stuffData
     }
 }

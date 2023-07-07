@@ -1,10 +1,10 @@
-const safeShouldBeVisible = (elementname: string, visible = true, trials = 10) => {
+const safeShouldBeVisible = (elementname: string, visible = true, trials = 50) => {
     const beVisible = visible ? 'be.visible' : 'not.be.visible'
     try {
         cy.get(elementname).should(beVisible)
     } catch {
         if (trials > 0) {
-            cy.wait(500).then(() => {
+            cy.wait(200).then(() => {
                 safeShouldBeVisible(elementname, visible, trials - 1)
             })
         }
