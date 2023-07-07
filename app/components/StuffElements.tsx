@@ -23,12 +23,20 @@ const StuffElements = (props: {
     newData.open = true
     newData.controlA = 'Yes'
     newData.controlB = 'No'
+    newData.showControl = true
     newData.voteStepTwo = voteStepTwo
     setDialogData(newData)
   }
 
   const voteStepTwo = async (data: VoteData) => {
     if (data.id >= 0) {
+      const newData = { ...dialogData }
+      newData.title = `Please wait`
+      newData.message = `Submitting your vote for "${data.name}"?`
+      newData.controlA = 'Yes'
+      newData.controlB = 'No'
+      newData.open = true
+      newData.showControl = false
       await props.castVote(data)
       setVoteEnabled(false)
     }

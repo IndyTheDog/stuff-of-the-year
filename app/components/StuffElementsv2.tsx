@@ -9,7 +9,7 @@ import Message from './Message'
 
 const StuffElements = (props: {
   stuffData: StuffData[]
-  castVote: (value: VoteData) => Promise<string>
+  castVote: (value: VoteData) => Promise<unknown>
 }) => {
   const [dialogData, setDialogData] = useState({} as DialogData)
   const [voteEnabled, setVoteEnabled] = useState(true)
@@ -17,10 +17,11 @@ const StuffElements = (props: {
   const voteStepOne = (vote: string) => {
     const data = JSON.parse(vote)
     const newData = { ...dialogData }
-    newData.message = `Do you want to vote for "${data.name}"?`
     newData.title = `Cast your vote`
+    newData.message = `Do you want to vote for "${data.name}"?`
     newData.data = data
     newData.open = true
+    newData.showControl = true
     newData.controlA = 'Yes'
     newData.controlB = 'No'
     newData.voteStepTwo = voteStepTwo
@@ -29,6 +30,14 @@ const StuffElements = (props: {
 
   const voteStepTwo = async (data: VoteData) => {
     if (data.id >= 0) {
+      const newData = { ...dialogData }
+      newData.title = `Please wait`
+      newData.message = `Submitting your vote for "${data.name}"?`
+      newData.controlA = 'Yes'
+      newData.controlB = 'No'
+      newData.open = true
+      newData.showControl = false
+      setDialogData(newData)
       await props.castVote(data)
       setVoteEnabled(false)
     }

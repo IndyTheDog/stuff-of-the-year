@@ -3,8 +3,16 @@ import DialogData from '../models/DialogData'
 import { MouseEvent } from 'react'
 
 const Message = (props: { data: DialogData }) => {
-  const { open, title, message, controlA, controlB, voteStepTwo, data } =
-    props.data
+  const {
+    open,
+    title,
+    message,
+    controlA,
+    controlB,
+    voteStepTwo,
+    data,
+    showControl,
+  } = props.data
   const buttonClass =
     'bg-tertiary-bg text-tertiary-color border-tertiary-color hover:bg-tertiary-color hover:text-tertiary-bg hover:border-tertiary-bg'
 
@@ -32,12 +40,14 @@ const Message = (props: { data: DialogData }) => {
           <button
             className={`${buttonClass} mr-3 py-1 px-5 rounded-md font-semibold`}
             onClick={complete}
+            hidden={!showControl}
             value={0}
           >
             {controlA}
           </button>
           <button
             className={`${buttonClass} ml-3 py-1 px-5 rounded-md font-semibold`}
+            hidden={!showControl}
             onClick={complete}
             value={1}
           >

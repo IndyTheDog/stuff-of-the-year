@@ -8,4 +8,5 @@ export default interface DialogData {
     open: boolean
     voteStepTwo: (data: VoteData) => void
     data: VoteData
+    showControl: boolean
 }

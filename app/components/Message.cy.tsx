@@ -10,6 +10,7 @@ const dialogData: DialogData = {
   title: 'Thank you',
   open: true,
   data: { id: 0, name: '' },
+  showControl: true
 }
 
 describe('<Message />', () => {

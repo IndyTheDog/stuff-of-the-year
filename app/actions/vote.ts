@@ -3,8 +3,10 @@
 import VoteData from "../models/VoteData"
 
 const castVote = async (value: VoteData) => {
-    void (value)
-    return "Thank you for your vote."
+    const url = `${process.env.PROJECT_2023_TH_VOTE_URL}?projectId=${value.id}&projectName=${value.name}`
+    const res = await fetch(url)
+    const data = await res.json()
+    return data
 }
 
 export default castVote

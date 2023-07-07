@@ -40,6 +40,7 @@ const Page = () => {
     open: false,
     voteStepTwo,
     data: { id: -1, name: '' },
+    showControl: true
   }
   const [dialogData, setDialogData] = useState(defaultDialogData)
 
