@@ -78,11 +78,11 @@ const Stuff = (props: {
         id={`content-stuff-item-${assetId}`}
       >
         <span
-          className="text-title text-lg font-semibold text-justify"
+          className="text-title text-lg font-semibold"
           id={`stuff-title-${assetId}`}
         >{`${title} by ${ownerName}`}</span>
         <span
-          className="text-primary-color pt-3 text-sm font-medium text-justify leading-4 grow"
+          className="text-primary-color pt-3 text-sm font-medium leading-4 grow"
           id={`stuff-description-${assetId}`}
         >
           {description}
