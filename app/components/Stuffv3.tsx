@@ -32,7 +32,7 @@ const Stuff = (props: {
   })
 
   const mediaData =
-    stuffVideo?.length > 0 ? (
+    stuffVideo && stuffVideo?.length > 0 ? (
       <div className="rounded-t-xl" id={`stuff-video-${assetId}`}>
         <iframe
           width={512}

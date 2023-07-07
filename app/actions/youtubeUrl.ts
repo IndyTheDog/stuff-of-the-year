@@ -1,4 +1,5 @@
-export const getYoutubeEmbeddedUrlFromFullUrl = (videoUrl: string): string => {
+export const getYoutubeEmbeddedUrlFromFullUrl = (videoUrl: string): string | undefined => {
+    if(!videoUrl) return undefined
     if (videoUrl.indexOf('youtube.com') === -1) return `${videoUrl}`
     const IMAGE_URL_FORMAT = 'https://www.youtube.com/embed/YTVIDEOID?html5=1&amp;wmode=opaque'
     if (videoUrl.indexOf('watch?v=') > 0) {
