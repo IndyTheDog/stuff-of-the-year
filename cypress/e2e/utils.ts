@@ -1,15 +1,6 @@
-const safeShouldBeVisible = (elementname: string, visible = true, trials = 50) => {
+const safeShouldBeVisible = (elementname: string, visible = true) => {
     const beVisible = visible ? 'be.visible' : 'not.be.visible'
-    try {
-        cy.get(elementname).should(beVisible)
-    } catch {
-        if (trials > 0) {
-            cy.wait(200).then(() => {
-                safeShouldBeVisible(elementname, visible, trials - 1)
-            })
-        }
-        else cy.get(elementname).should(beVisible)
-    }
+        cy.get(elementname, { timeout: 12000 }).should(beVisible)
 }
 
 export default safeShouldBeVisible

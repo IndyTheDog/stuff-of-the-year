@@ -1,0 +1,67 @@
+default:
+    image: ${REGISTRY_URL}/${RUNNER_CONTAINER}:latest
+    services:
+        - ${REGISTRY_URL_PROD}/${RUNNER_SERVICE}:latest
+    cache:
+        key: ${CI_COMMIT_REF_SLUG}-${CI_JOB_NAME}
+
+variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_HOST: 'tcp://localhost:2375'
+    DOCKER_DRIVER: overlay2
+    DOCKER_IMAGE: stuff-of-the-year
+    DOCKER_APP_TAG: ${REGISTRY_URL}/${ORGANIZATION_ID}/${DOCKER_IMAGE}-app:${CI_COMMIT_SHORT_SHA}
+    DOCKER_APP_LATEST: ${REGISTRY_URL}/${ORGANIZATION_ID}/${DOCKER_IMAGE}-app:latest
+    DOCKER_SETUP_TAG: ${REGISTRY_URL}/${ORGANIZATION_ID}/${DOCKER_IMAGE}-setup:${CI_COMMIT_SHORT_SHA}
+    DOCKER_CYPRESS_TAG: ${REGISTRY_URL}/${ORGANIZATION_ID}/${DOCKER_IMAGE}-cypress:latest
+
+stages:
+    - Prepare
+    - Test
+    - Deploy
+
+.pre:
+    stage: Prepare
+    tags:
+        - Production
+
+"Check environment":
+    extends: .pre
+    script:
+        - echo "This stage checks the development environment is stable."
+        - docker build -t ${DOCKER_SETUP_TAG} -f etc/docker/node/Dockerfile .
+        - docker run --user "1000:1000" --volume $PWD:/app --workdir "/app" --entrypoint "/home/node/entrypoint-setup.sh" ${DOCKER_SETUP_TAG}
+        - docker push ${DOCKER_SETUP_TAG}
+
+"Build Cypress":
+    when: manual
+    extends: .pre
+    script:
+        - echo "This stage builds the Cypress image."
+        - docker build -t ${DOCKER_CYPRESS_TAG} -f etc/docker/cypress/Dockerfile .
+        - docker push ${DOCKER_CYPRESS_TAG}
+
+.tests:
+    stage: Test
+    tags:
+        - Production
+
+"Component tests":
+    extends: .tests
+    script:
+        - echo "This stage runs the components tests."
+        - docker run --rm --volume $PWD:/app --workdir "/app" --env CYPRESS_VIDEO=false --env CYPRESS_SCREENSHOT_ON_RUN_FAILURE=false --env TEST_TYPE="component:headless" ${DOCKER_CYPRESS_TAG}
+
+"End-to-end tests":
+    extends: .tests
+    script:
+        - echo "This stage runs the E2E tests."
+        - docker run --rm --volume $PWD:/app --workdir "/app" --env CYPRESS_VIDEO=false --env CYPRESS_SCREENSHOT_ON_RUN_FAILURE=false --env TEST_TYPE="e2e:headless" ${DOCKER_CYPRESS_TAG}
+
+"Deploy To Vercel":
+    stage: Deploy
+    tags:
+        - Production
+    script:
+        - echo "This stage deploys the application to Vercel."
+        - docker run --rm --user "1000:1000" --volume $PWD:/app --env VERCEL_TOKEN=${VERCEL_TOKEN} --env VERCEL_PROJECT_ID=${VERCEL_PROJECT_ID} --env VERCEL_ORG_ID=${VERCEL_ORG_ID} --workdir "/app" --entrypoint "/home/node/entrypoint-deploy.sh" ${DOCKER_SETUP_TAG}

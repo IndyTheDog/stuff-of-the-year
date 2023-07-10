@@ -8,6 +8,16 @@ export default defineConfig({
     video: false,
     screenshotOnRunFailure: false,
     watchForFileChanges: true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setupNodeEvents(on, config) {
+      on('task', {
+        log(message) {
+          console.log(message)
+
+          return null
+        },
+      })
+    },
   },
   component: {
     devServer: {

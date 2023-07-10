@@ -1,8 +1,8 @@
-version: '3.8'
+version: '3.6'
 
 services:
-  # The Cypress E2E testing service
-  cypress-e2e:
+  # The Cypress testing service
+  cypress:
     build:
       context: .
       dockerfile: etc/docker/cypress/Dockerfile
@@ -11,8 +11,8 @@ services:
     environment:
       - CYPRESS_VIDEO=false
       - CYPRESS_SCREENSHOT_ON_RUN_FAILURE=false
-      - TEST_TYPE=e2e
       - DISPLAY
+      - TEST_TYPE=$TEST_TYPE
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - $PWD/cypress:/app/cypress
@@ -27,30 +27,7 @@ services:
       - $PWD/tailwind.config.js:/app/tailwind.config.js
       - $PWD/postcss.config.js:/app/postcss.config.js
       - $PWD/yarn.lock:/app/yarn.lock
-  # The Cypress components testing service
-  cypress-components:
-    build:
-      context: .
-      dockerfile: etc/docker/cypress/Dockerfile
-    networks:
-      - nextapp-network
-    environment:
-      - CYPRESS_VIDEO=false
-      - CYPRESS_SCREENSHOT_ON_RUN_FAILURE=false
-      - TEST_TYPE=component
-      - DISPLAY
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - $PWD/cypress:/app/cypress
-      - $PWD/app:/app/app:ro
-      - $PWD/public:/app/public:ro
-      - $PWD/styles:/app/styles:ro
-      - $PWD/package.json:/app/package.json
-      - $PWD/tsconfig.json:/app/tsconfig.json
-      - $PWD/next.config.js:/app/next.config.js
-      - $PWD/tailwind.config.js:/app/tailwind.config.js
-      - $PWD/postcss.config.js:/app/postcss.config.js
-      - $PWD/yarn.lock:/app/yarn.lock
+
   # Run the next JS application in dev mode
   dev:
     build:
