@@ -58,10 +58,10 @@ const Home = async () => {
       <h1 className="pb-10 text-2xl">Current Sprint</h1>
       <table>
         <thead>
-          <th className="w-2/5">Story</th>
-          <th className="w-1/5">Status</th>
-          <th className="w-1/5">Completed</th>
-          <th className="w-1/5">Main Assignee</th>
+          <th className="w-3/6">Story</th>
+          <th className="w-1/6">Status</th>
+          <th className="w-1/6">Completed</th>
+          <th className="w-1/6">Main Assignee</th>
         </thead>
         {jiraInfo}
       </table>
