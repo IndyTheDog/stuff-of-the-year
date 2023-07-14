@@ -1,9 +1,6 @@
 const Home = async () => {
   const myHeaders = new Headers()
-  myHeaders.append(
-    'Authorization',
-    `Basic ${process.env.JIRA_TOKEN}`
-  )
+  myHeaders.append('Authorization', `Basic ${process.env.JIRA_TOKEN}`)
 
   const requestOptions = {
     method: 'GET',
@@ -28,34 +25,46 @@ const Home = async () => {
 
   const data = await getJiraData()
   const jiraInfo = [] as JSX.Element[]
-  data.issues.forEach((element) => {
-    const resolutionDate = new Date(element.fields.resolutiondate)
-    const day = resolutionDate.getDate()
-    const month = resolutionDate.getMonth()
-    const year = resolutionDate.getFullYear()
-    const el = (
-      <tr className="border-secondary-color border-2">
-        <td className="w-2/5 px-2 py-2 border-r-2">{element.fields.summary}</td>
-        <td className="w-1/5 px-2 py-2  border-r-2">
-          {element.fields.resolution
-            ? colorMe(element.fields.resolution.name)
-            : colorMe(element.fields.status?.name)}
-        </td>
-        <td className="w-1/5 px-2 py-2  border-r-2">
-          {year != 1970 ? day + '-' + month + '-' + year : ''}
-        </td>
-        <td className="w-1/5 px-2 py-2 ">
-          {element.fields.assignee.displayName}
-        </td>
-      </tr>
-    )
-    jiraInfo.push(el)
-  })
+  if (data.issues) {
+    data.issues.forEach((element) => {
+      const resolutionDate = new Date(element.fields.resolutiondate)
+      const day = resolutionDate.getDate()
+      const month = resolutionDate.getMonth()
+      const year = resolutionDate.getFullYear()
+      const el = (
+        <tr className="border-secondary-color border-2">
+          <td className="px-2 py-2 border-r-2">
+            {element.fields.summary}
+          </td>
+          <td className="px-2 py-2  border-r-2">
+            {element.fields.resolution
+              ? colorMe(element.fields.resolution.name)
+              : colorMe(element.fields.status?.name)}
+          </td>
+          <td className="px-2 py-2  border-r-2">
+            {year != 1970 ? day + '-' + month + '-' + year : ''}
+          </td>
+          <td className="px-2 py-2 ">
+            {element.fields.assignee.displayName}
+          </td>
+        </tr>
+      )
+      jiraInfo.push(el)
+    })
+  }
 
   return (
     <main className="text-slate-50 w-full px-10 pt-10">
       <h1 className="pb-10 text-2xl">Current Sprint</h1>
-      <table>{jiraInfo}</table>
+      <table>
+        <thead>
+          <th className="w-2/5">Story</th>
+          <th className="w-1/5">Status</th>
+          <th className="w-1/5">Completed</th>
+          <th className="w-1/5">Main Assignee</th>
+        </thead>
+        {jiraInfo}
+      </table>
     </main>
   )
 }
