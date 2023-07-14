@@ -2,7 +2,7 @@ const Home = async () => {
   const myHeaders = new Headers()
   myHeaders.append(
     'Authorization',
-    ''
+    `Basic ${process.env.JIRA_TOKEN}`
   )
 
   const requestOptions = {
