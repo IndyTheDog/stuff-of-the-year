@@ -19,3 +19,12 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.info ol, .info ul {
+  list-style-type: circle;
+  padding-left: 10px;
+}
+
+.info ol {
+  list-style-type: decimal;
+}

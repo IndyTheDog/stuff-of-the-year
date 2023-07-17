@@ -166,6 +166,28 @@ const Home = async () => {
     <main className="text-slate-50 w-full px-10">
       {currentSprint.component}
       {nextSprint.component}
+      <div className="info">
+        <h2 className="text-2xl">Information</h2>
+        If you don&apos;t see all expected information, make sure that:
+        <ol>
+          <li>
+            There is a Sprint started with the name starting with &quot;
+            {sprintPrefix}&quot;
+          </li>
+          <li>
+            All stories in the Sprint have a label of either &apos;dot&apos; or
+            &apos;hipflat&apos;
+          </li>
+          <li>
+            Priorities have been set:
+            <ul>
+              <li>Highest = P1</li>
+              <li>High = P2</li>
+              <li>Medium = P3</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
     </main>
   )
 }
