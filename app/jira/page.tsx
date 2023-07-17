@@ -28,7 +28,7 @@ const Home = async () => {
 
   const getJiraData = async (sprint: string) => {
     const response = await fetch(
-      `https://rebuiltfw.atlassian.net/rest/api/3/search?jql=project%3DDW%20and%20sprint%20${sprint}%20and%20labels%20IN%20(dot%2Chipflat)`,
+      `https://rebuiltfw.atlassian.net/rest/api/3/search?jql=project%3DDW%20and%20sprint%20${sprint}%20and%20labels%20IN%20(dot%2Chipflat)%20order%20by%20priority%20desc`,
       requestOptions
     )
     const jsonResponse = await response.json()
@@ -144,28 +144,28 @@ const Home = async () => {
     }
   }
 
-  const findPreviousSprint = async (currentSprintId: number) => {
+  const findNextSprint = async (currentSprintId: number) => {
     const dwSprints = await getAllSprints()
-    let latestSprintId = 0
+    let nextSprintId = 10000
     dwSprints.forEach((sprint) => {
-      if (sprint.id < currentSprintId && sprint.id > latestSprintId) {
-        latestSprintId = sprint.id
+      if (sprint.id > currentSprintId && sprint.id < nextSprintId) {
+        nextSprintId = sprint.id
       }
     })
-    return latestSprintId
+    return nextSprintId
   }
 
   const currentSprintData = await getJiraData('in%20openSprints()')
   const currentSprint = buildSprint('Current Sprint', currentSprintData.issues)
   const currentSprintId = currentSprint.id
-  const lastSprintId = await findPreviousSprint(currentSprintId)
-  const lastSprintData = await getJiraData(`=%20${lastSprintId}`)
-  const lastSprint = buildSprint('Last Sprint', lastSprintData.issues)
+  const nextSprintId = await findNextSprint(currentSprintId)
+  const nextSprintData = await getJiraData(`=%20${nextSprintId}`)
+  const nextSprint = buildSprint('Next Sprint', nextSprintData.issues)
 
   return (
     <main className="text-slate-50 w-full px-10">
-      {lastSprint.component}
       {currentSprint.component}
+      {nextSprint.component}
     </main>
   )
 }
