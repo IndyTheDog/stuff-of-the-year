@@ -6,6 +6,7 @@ const Home = async () => {
   const requestOptions = {
     method: 'GET',
     headers: myHeaders,
+    next: { revalidate: 60 }
   }
 
   const getAllSprints = async () => {
@@ -29,7 +30,7 @@ const Home = async () => {
   const getJiraData = async (sprint: string) => {
     const response = await fetch(
       `https://rebuiltfw.atlassian.net/rest/api/3/search?jql=project%3DDW%20and%20sprint%20${sprint}%20and%20labels%20IN%20(dot%2Chipflat)%20order%20by%20priority%20desc`,
-      requestOptions
+      requestOptions,
     )
     const jsonResponse = await response.json()
     return jsonResponse
