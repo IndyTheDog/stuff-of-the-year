@@ -64,6 +64,7 @@ const Home = async () => {
     return priorityContent
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const buildTable = (issues: any[]) => {
     const sprintData: { id: number; name: string; component: JSX.Element[] } = {
       id: 0,
@@ -115,6 +116,7 @@ const Home = async () => {
     return sprintData
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const buildSprint = (title: string, issues: any[]) => {
     const currentSprintInfo = buildTable(issues)
     const component = (
